@@ -43,5 +43,5 @@ app.get('/zalo/callback', async (req, res) => {
 
 app.listen(process.env.PORT, (err) => {
   if (err) throw err;
-  console.log('Server started 8080')
+  console.log(`Server started ${process.env.PORT}`)
 })

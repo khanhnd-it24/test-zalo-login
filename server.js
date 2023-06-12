@@ -16,8 +16,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/zalo/login', (req, res) => {
-
-  const zaloUri = encodeURIComponent(`https://oauth.zaloapp.com/v4/oa/permission?app_id=${appId}&redirect_uri=${callbackUrl}/zalo/callback`)
+  const _callbackUrl = encodeURIComponent(`${callbackUrl}/zalo/callback`)
+  const zaloUri = encodeURIComponent(`https://oauth.zaloapp.com/v4/oa/permission?app_id=${appId}&redirect_uri=${_callbackUrl}`)
   res.redirect(zaloUri)
 })
 

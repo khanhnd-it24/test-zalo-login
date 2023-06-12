@@ -39,7 +39,7 @@ app.get('/zalo/callback', async (req, res) => {
           "refresh_token": ${refresh_token}
         }
 
-        window.returnValue = returnValue
+        window.opener.callback(returnValue)
         window.close()
       </script>
     </div>

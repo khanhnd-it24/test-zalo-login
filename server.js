@@ -22,21 +22,26 @@ app.get('/zalo/login', (req, res) => {
 })
 
 app.get('/zalo/callback', async (req, res) => {
-  const { code, uid } = req.query;
+  const { code, oa_id } = req.query;
 
   const infoRes = await axios.get(`https://oauth.zaloapp.com/v3/access_token?app_id=${appId}&app_secret=${appSecret}&code=${code}`);
   const { access_token, refresh_token } = infoRes.data;
 
   var returnScript = `
-    <script>
-      var returnValue = {
-        "access_token": ${access_token},
-        "refresh_token": ${refresh_token}
-      }
+    <div>
+      <p>${access_token}</p>
+      <p>${refresh_token}</p>
+      <p>${oa_id}</p>
+      <script>
+        var returnValue = {
+          "access_token": ${access_token},
+          "refresh_token": ${refresh_token}
+        }
 
-      window.returnValue = returnValue
-      window.close()
-    </script>
+        window.returnValue = returnValue
+        window.close()
+      </script>
+    </div>
   `
   return res.send(returnScript);
 })

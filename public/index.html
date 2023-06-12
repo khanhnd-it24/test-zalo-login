@@ -20,18 +20,15 @@
     <style></style>
   </body>
   <script>
-    function callback(returnValue) {
-      console.log(returnValue)
-    }
     function onClick() {
       const popup = window.open('/zalo/login', 'popup', 'popup=true');
-      // var timer = setInterval(function () {
-      //   if (popup.closed) {
-      //     clearInterval(timer);
-      //     var returnValue = popup.returnValue;
-      //     console.log(returnValue);
-      //   }
-      // }, 500);
+      var timer = setInterval(function () {
+        if (popup.closed) {
+          clearInterval(timer);
+          var returnValue = popup.returnValue;
+          console.log(returnValue);
+        }
+      }, 500);
     }
   </script>
 </html>

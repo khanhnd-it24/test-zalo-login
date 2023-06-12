@@ -35,8 +35,8 @@ app.get('/zalo/callback', async (req, res) => {
       <p>${oa_id}</p>
       <script>
         var returnValue = {
-          "access_token": ${access_token},
-          "refresh_token": ${refresh_token}
+          "access_token": "${access_token}",
+          "refresh_token": "${refresh_token}"
         }
 
         window.opener.callback(returnValue)

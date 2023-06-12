@@ -75,6 +75,8 @@ app.get('/zalo/callback', async (req, res) => {
           "oa_id": ${oa_id}
         }
 
+        console.log(returnValue)
+
         window.returnValue = returnValue
         window.close()
       </script>

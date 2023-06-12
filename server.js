@@ -37,7 +37,7 @@ app.get('/zalo/login', (req, res) => {
   codeVerifier = generateString(43)
   const codeChallenge = Buffer.from(sha256(toAscii(codeVerifier))).toString('base64');
   const _callbackUrl = encodeURIComponent(`${callbackUrl}/zalo/callback`)
-  const zaloUri = `https://oauth.zaloapp.com/v4/oa/permission?app_id=${appId}&redirect_uri=${_callbackUrl}&code_challenge=${codeChallenge}`
+  const zaloUri = `https://oauth.zaloapp.com/v4/oa/permission?app_id=${appId}&redirect_uri=${_callbackUrl}`
   res.redirect(zaloUri)
 })
 

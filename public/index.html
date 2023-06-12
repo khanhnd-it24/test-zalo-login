@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login zalo</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button onclick="onClick()">
+      Đăng nhập bằng zalo
+    </button>
+  </div>
+  <style>
+  
+  </style>
+</body>
+<script>
+  function onClick() {
+    const popup = window.open('https://b660-118-70-129-35.ngrok-free.app/zalo/login', "popup", "popup=true")
+    const checkPopup = setInterval(() => {
+      console.log(popup.window)
+      // if(popup.window.location.href.includes('https://b660-118-70-129-35.ngrok-free.app/zalo/result')) {
+      //   popup.close()
+      // }
+
+      if (!popup || !popup.closed) return;
+      clearInterval(checkPopup);
+    }, 1000)
+  }
+</script>
+</html>

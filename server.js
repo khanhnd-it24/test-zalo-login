@@ -1,5 +1,11 @@
 const express = require('express');
 const cors = require('cors')
+require('dotenv').config();
+
+const appId = process.env.APP_ID;
+const callbackUrl = process.env.CALLBACK_URL
+const appSecret = process.env.APP_SECRET
+
 const app = express();
 
 app.use(cors())
@@ -10,21 +16,32 @@ app.get('/', (req, res) => {
 })
 
 app.get('/zalo/login', (req, res) => {
-  const zaloUri = "https://oauth.zaloapp.com/v4/oa/permission?app_id=3612785874375008341&redirect_uri=https%3A%2F%2Fb660-118-70-129-35.ap.ngrok.io%2Fzalo%2Fcallback"
+
+  const zaloUri = `https://oauth.zaloapp.com/v4/oa/permission?app_id=${appId}&redirect_uri=${callbackUrl}/zalo/callback`
   res.redirect(zaloUri)
 })
 
 app.get('/zalo/callback', async (req, res) => {
   const { code, uid } = req.query;
 
-  const infoRes = await axios.get(`https://oauth.zaloapp.com/v3/access_token?app_id=3612785874375008341&app_secret=KLWaRy6RW6BC66mmEEw6&code=${code}`);
+  const infoRes = await axios.get(`https://oauth.zaloapp.com/v3/access_token?app_id=${appId}&app_secret=${appSecret}&code=${code}`);
   const { access_token, refresh_token } = infoRes.data;
 
- 
-  return res.redirect(`/zalo/result?access_token=${access_token}&refresh_token=${refresh_token}`);
+  var returnScript = `
+    <script>
+      var returnValue = {
+        "access_token": ${access_token},
+        "refresh_token": ${refresh_token}
+      }
+
+      window.returnValue = returnValue
+      window.close()
+    </script>
+  `
+  return res.send(returnScript);
 })
 
-app.listen(8080, (err) => {
+app.listen(process.env.PORT, (err) => {
   if (err) throw err;
   console.log('Server started 8080')
 })
